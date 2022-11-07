@@ -28,13 +28,13 @@ class OPCA():
         self.cov_mat = self.covariance_matrix(sub_means)
         # Getting eigenvalues and eigenvectors
         self.eigenvalues, self.eigenvectors = SLA.eig(self.cov_mat, left = True, right = False)
-        # values = values.astype(float)
+        self.eigenvalues = self.eigenvalues.astype(float)
         # Descending ordering to eigenvalues
         order = np.argsort(self.eigenvalues)[::-1]
         self.eigenvalues = self.eigenvalues[order]
         # Ordering eigenvectors according to eigenvalues
         self.eigenvectors = self.eigenvectors.T[order]
-        self.eigenvectors = np.array([-self.eigenvectors[i] if i%2 != 0 else self.eigenvectors[i] for i in range(len(self.eigenvectors))])
+        self.eigenvectors = np.array([-self.eigenvectors[i] if i%2 != 0 else self.eigenvectors[i] for i in range(len(self.eigenvectors))]).astype(float)
         # Choosing number of components of the feature vector
         feat_vec = self.eigenvectors[:axes]
         # Transforming the data
