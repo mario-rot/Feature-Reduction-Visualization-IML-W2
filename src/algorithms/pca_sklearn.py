@@ -85,6 +85,7 @@ class PCA_sklearn():
 
     def scree_plot(self, save=False):
         plt.plot(np.cumsum(self.explained_variance_ratio), marker='.', color=colors[1])
+        plt.plot(1-np.cumsum(self.explained_variance_ratio), marker='.', color=colors[3])
         plt.bar(list(range(0, self.n_features)), self.explained_variance_ratio, color=colors[2])
         plt.xlabel('Number of Components')
         plt.ylabel('Variance (%)')
