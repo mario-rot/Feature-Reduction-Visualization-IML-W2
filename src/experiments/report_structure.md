@@ -1,0 +1,49 @@
+- Introduction - few sentences (1/3 page)
+- Metodology - (2 pages)
+    - Exp: 1 - PCA Comparison (1 page)
+        - Describe OPCA
+        - Talk about sklearn PCAs
+        - Mention that result of passing datasets through all PCAs are shown in the results section
+        - Put the figure describing the experiment
+        - Talk a little about FA
+    - Exp:2 Dimensionality Reduction Experiments (1 page)
+        - Explain about the figure
+        - Put the figure describing the experiment
+- Results ()
+    - Plots of original data (3)
+    - Experiment 1 Results (OPCA, SKPCA, SK_INC_PCA & FA Comparison)
+        - OPCA
+            - Plots
+                - New subspace (3)
+                - Reconstructed data (3)
+                - Explained variance Plots (3)
+        - sklearn PCA 
+            - Plots
+                - New subspace (3)
+                - Reconstructed data (3)
+        - sklearn Incremental PCA 
+            - Plots
+                - New subspace (3)
+                - Reconstructed data (3)
+        - Feature Agglomeration
+            - Plots
+            New-subspace
+        - Solve 1st question here
+    - Experiment 2 Results (PCA Comparison)
+        -Dimensionality Reduction
+            - PCA
+                - PCA-Kmeans-PCA
+                    - Original data
+                    - Transformed Data
+                - PCA-Agg_Clus-PCA
+                - PCA-Kmeans-T-SNE
+                - PCA-Agg_Clus-T-SNE
+            - Feature Agglomeration
+                - FA-Kmeans-PCA
+                - FA-Agg_Clus-PCA
+                - FA-Kmeans-T-SNE
+                - FA-Agg_Clus-T-SNE
+        
+
+- Conclusions (2 pagea)
+    - Answers to the questios

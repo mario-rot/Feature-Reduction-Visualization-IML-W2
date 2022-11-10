@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
  
 # Adding optional argument
 parser.add_argument("-ds", "--DataSet", help = "['iris', 'cmc', 'pen-based', 'vowel']", default='iris', type=str)
-parser.add_argument("-dr", "--DimReduct", help = "['pca','feat_agg']", default='pca', type=str)
+parser.add_argument("-dr", "--DimReduct", help = "['none','pca','feat_agg']", default='pca', type=str)
 parser.add_argument("-cl", "--ClustAlg", help = "['kmeans','agg_cl']", default='kmeans', type=str)
 parser.add_argument("-vt", "--VisTech", help = "['pca', 't-sne']", default='pca', type=str)
  
