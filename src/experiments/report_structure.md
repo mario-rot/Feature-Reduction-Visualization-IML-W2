@@ -30,19 +30,33 @@
             New-subspace
         - Solve 1st question here
     - Experiment 2 Results (PCA Comparison)
-        -Dimensionality Reduction
+        - Dimensionality Reduction
             - PCA
                 - PCA-Kmeans-PCA
-                    - Original data
-                    - Transformed Data
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - PCA-Agg_Clus-PCA
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - PCA-Kmeans-T-SNE
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - PCA-Agg_Clus-T-SNE
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
             - Feature Agglomeration
                 - FA-Kmeans-PCA
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - FA-Agg_Clus-PCA
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - FA-Kmeans-T-SNE
+                    - plot with dimensionality reduction
+                    - plot without dimensionality reduction
                 - FA-Agg_Clus-T-SNE
+                    - plot with dimensionality reduction
+                    - plot without dimensionality
         
 
 - Conclusions (2 pagea)
