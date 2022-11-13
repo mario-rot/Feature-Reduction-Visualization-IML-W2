@@ -1,7 +1,7 @@
 - Introduction - few sentences (1/3 page)
-- Metodology - (2 pages)
+- Methodology - (2 pages)
     - Exp: 1 - PCA Comparison (1 page)
-        - Describe OPCA
+        - Describe OPCA 
         - Talk about sklearn PCAs
         - Mention that result of passing datasets through all PCAs are shown in the results section
         - Put the figure describing the experiment
@@ -14,21 +14,24 @@
     - Experiment 1 Results (OPCA, SKPCA, SK_INC_PCA & FA Comparison)
         - OPCA
             - Plots
-                - New subspace (3)
+                - New subspace (3) - Transformed Data
                 - Reconstructed data (3)
-                - Explained variance Plots (3)
+                - Explained variance Plots (3) (Metric)
         - sklearn PCA 
             - Plots
                 - New subspace (3)
                 - Reconstructed data (3)
+                - Explained variance Plots (3) (Metric)
         - sklearn Incremental PCA 
             - Plots
                 - New subspace (3)
                 - Reconstructed data (3)
+                - Explained variance Plots (3) (Metric)
         - Feature Agglomeration
             - Plots
             New-subspace
-        - Solve 1st question here
+            - Reconstructed data (3)
+        - Solve 1st, 2nd, 3rd 4th, 5th, 6th question here
     - Experiment 2 Results (PCA Comparison)
         - Dimensionality Reduction
             - PCA
@@ -57,7 +60,8 @@
                 - FA-Agg_Clus-T-SNE
                     - plot with dimensionality reduction
                     - plot without dimensionality
+        - Question 7th & 8th here!
         
 
-- Conclusions (2 pagea)
-    - Answers to the questios
+- Conclusions (2 pages)
+    - Answers to the questions (lessons learned)

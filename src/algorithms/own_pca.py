@@ -6,16 +6,18 @@ import itertools
 
 data_path = '../data/processed/'
 
-plt.rcParams["image.cmap"] = "Set2"
+plt.rcParams["image.cmap"] = "tab20"
 # Para cambiar el ciclo de color por defecto en Matplotlib
-plt.rcParams['axes.prop_cycle'] = plt.cycler(color=plt.cm.Set2.colors)
+plt.rcParams['axes.prop_cycle'] = plt.cycler(color=plt.cm.tab20.colors)
 #Set_ColorsIn(plt.cm.Set2.colors)
-colors = plt.cm.Set2.colors
+colors = plt.cm.tab20.colors
 
 class OPCA():
     def __init__(self, 
-                 data: np.array):
+                 data: np.array,
+                 data_name: str):
         self.data = data
+        self.data_name = data_name
         self.n_instances = data.shape[0] 
         self.n_features = data.shape[1]
         self.means = None
@@ -51,29 +53,34 @@ class OPCA():
         self.explained_variance_ratio = self.eigenvalues / self.eigenvalues.sum()
         return -self.transformed_data.T
 
-    def visualize(self, labels, axes=[0, 1, 2], figsize=(10, 10), original=True, save=False):
-        if original:
+    def visualize(self, labels, axes=[0, 1, 2], figsize=(10, 10), original=True, save=None):
+        if original == 'Original':
             data = self.data
+            title = 'Original Data'
+        elif original == 'Reconstructed':
+            data = self.reconstructed_data
+            title ='Reconstructed Data'
         else:
             data = self.transformed_data.T
+            title = 'Transformed Data'
 
         values = []
         for i in axes:
             values.append(data[:, i])
         values = np.array(values).T
         dims = len(axes)
-        print(data.shape)
+
 
         if dims == 4:
-            self.scatter_4D(values, labels, figsize)
+            self.scatter_4D(values, labels, axes, title, self.data_name, figsize, save)
         elif dims == 3:
-            self.scatter_3D(values, labels, figsize)
+            self.scatter_3D(values, labels, axes, title, self.data_name, figsize, save)
         elif dims == 2:
-            self.scatter_2D(values, labels, figsize)
+            self.scatter_2D(values, labels, axes, title, self.data_name, figsize, save)
 
         if save:
             plt.savefig(save)
-
+        
     def scree_plot(self, save=False):
         plt.plot(np.cumsum(self.explained_variance_ratio), marker='.', color=colors[1])
         plt.bar(list(range(0, self.n_features)), self.explained_variance_ratio, color=colors[2])
@@ -81,7 +88,10 @@ class OPCA():
         plt.ylabel('Variance (%)')
 
         if save:
-            plt.savefig(save)
+            plt.savefig(save + 'scree_plot_{}.pdf'.format(self.data_name))
+
+        plt.show()
+
 
     @staticmethod
     def covariance_matrix(sub_means):
@@ -96,21 +106,48 @@ class OPCA():
         return cov
 
     @staticmethod
-    def scatter_4D(data, labels, figsize=(10, 10)):
+    def scatter_4D(data, labels, axes, title, data_name, figsize=(10, 10), save=None):
         fig = plt.figure(figsize=figsize)
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=labels, s=data[:, 3] * 10)
+        ax.set_title(title)
+        ax.set_xlabel(axes[0])
+        ax.set_ylabel(axes[1])
+        ax.set_zlabel(axes[2])
+
+        if save:
+            ax.savefig(save + 'scatter_plot_4D_{}.pdf'.format(title))
+        
         plt.show()
 
+
     @staticmethod
-    def scatter_3D(data, labels, figsize=(10, 10)):
+    def scatter_3D(data, labels, axes, title, data_name, figsize=(10, 10), save=None):
         fig = plt.figure(figsize=figsize)
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=labels, s=15)
+        ax.set_title(title)
+        ax.set_xlabel(axes[0])
+        ax.set_ylabel(axes[1])
+        ax.set_zlabel(axes[2])
+
+        if save: 
+            fig.savefig(save + 'scatter_plot_3D_{}.pdf'.format(title))
+        
         plt.show()
 
+
     @staticmethod
-    def scatter_2D(data, labels, figsize=(10, 10)):
+    def scatter_2D(data, labels, axes, title, data_name, figsize=(10, 10), save=None):
         fig = plt.figure(figsize=figsize)
-        plt.scatter(x[:, 0], x[:, 1], c=y, cmap='cool' )
+        plt.scatter(data[:, 0], data[:, 1], c=labels)#, cmap='cool' )
+        plt.title(title)
+        plt.xlabel(axes[0])
+        plt.ylabel(axes[1])
+
+        if save:
+            plt.savefig(save + 'scatter_plot_2D_{}.pdf'.format(title))
+
         plt.show()
+
+

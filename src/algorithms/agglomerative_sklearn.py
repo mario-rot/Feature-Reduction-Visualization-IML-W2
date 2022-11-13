@@ -15,8 +15,8 @@ class Agglomerative_sklearn():
 
     def fit(self,
                       n_clusters: int,
-                      affinity:str,
-                      linkage:str):
+                      affinity:str = 'euclidean',
+                      linkage:str = 'average'):
         clustering = AgglomerativeClustering(n_clusters=n_clusters,
                                              affinity=affinity,
                                              linkage=linkage).fit(self.data)   

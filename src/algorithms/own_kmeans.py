@@ -59,7 +59,7 @@ class OK_Means():
         return centers, labels, inertia
 
 
-    def kmeans_exp(self,
+    def fit(self,
                    n_clusters: int,
                    max_iteration=300,
                    n_attempt=10,
@@ -93,9 +93,10 @@ class OK_Means():
             if best_inertia is None or inertia < best_inertia:
                 best_inertia = inertia
                 best_attempt = i
-                results = Results(labels=labels,
-                                centers=centers,
-                                inertia=inertia)
+                #results = Results(labels=labels,
+                                # centers=centers,
+                                # inertia=inertia)
+                results = labels
         if verbose:
             print(f'Best attempt {best_attempt + 1}')
 
