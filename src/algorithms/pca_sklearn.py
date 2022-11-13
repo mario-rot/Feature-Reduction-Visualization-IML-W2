@@ -28,8 +28,10 @@ class PCA_sklearn():
         self.transformed_data = None
         self.explained_variance_ratio = None
         self.reconstructed_data = None
+        self.Version = None
 
     def do_sklearn_PCA(self, num_components=None):
+        self.Version='sklearn PCA'
         x = self.data
 
         pca = PCA(num_components)
@@ -49,6 +51,7 @@ class PCA_sklearn():
         return self.transformed_data
 
     def do_sklearn_incrementalPCA(self, num_components):
+        self.Version='Incremental PCA'
         x = self.data
 
         ipca = IncrementalPCA(num_components)
@@ -86,11 +89,11 @@ class PCA_sklearn():
         dims = len(axes)
 
         if dims == 4:
-            self.scatter_4D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_4D(values, labels, axes, title+ ' ' + self.Version, self.data_name,  figsize, save)
         elif dims == 3:
-            self.scatter_3D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_3D(values, labels, axes, title+ ' ' + self.Version, self.data_name, figsize, save)
         elif dims == 2:
-            self.scatter_2D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_2D(values, labels, axes, title + ' ' + self.Version, self.data_name, figsize, save)
 
         if save:
             plt.savefig(save)
@@ -98,6 +101,7 @@ class PCA_sklearn():
     def scree_plot(self, save=False):
         plt.plot(np.cumsum(self.explained_variance_ratio), marker='.', color=colors[1])
         plt.bar(list(range(0, self.n_features)), self.explained_variance_ratio, color=colors[2])
+        plt.title('Explained Variance {}'.format(self.Version))
         plt.xlabel('Number of Components')
         plt.ylabel('Variance (%)')
 

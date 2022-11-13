@@ -48,11 +48,11 @@ class TSNE_sklearn():
 
 
         if dims == 4:
-            self.scatter_4D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_4D(values, labels, axes, title+' t-SNE', self.data_name, figsize, save)
         elif dims == 3:
-            self.scatter_3D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_3D(values, labels, axes, title+' t-SNE', self.data_name, figsize, save)
         elif dims == 2:
-            self.scatter_2D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_2D(values, labels, axes, title+' t-SNE', self.data_name, figsize, save)
 
         if save:
             plt.savefig(save)

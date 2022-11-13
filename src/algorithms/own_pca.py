@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.linalg as SLA
 import itertools
@@ -27,6 +26,9 @@ class OPCA():
         self.transformed_data = None
         self.reconstructed_data = None
         self.explained_variance_ratio = None
+        self.feat_vec = None
+        self.U_eigenvalues = None
+        self.U_eigenvectors = None
 
     def fit(self, axes = 2):
         # Computing mean of each axis(feature) in the data
@@ -38,6 +40,7 @@ class OPCA():
         # Getting eigenvalues and eigenvectors
         self.eigenvalues, self.eigenvectors = SLA.eig(self.cov_mat, left = True, right = False)
         self.eigenvalues = self.eigenvalues.astype(float)
+        self.U_eigenvalues, self.U_eigenvectors = self.eigenvalues.copy(), self.eigenvectors.copy()
         # Descending ordering to eigenvalues
         order = np.argsort(self.eigenvalues)[::-1]
         self.eigenvalues = self.eigenvalues[order]
@@ -45,11 +48,11 @@ class OPCA():
         self.eigenvectors = self.eigenvectors.T[order]
         self.eigenvectors = np.array([-self.eigenvectors[i] if i%2 != 0 else self.eigenvectors[i] for i in range(len(self.eigenvectors))]).astype(float)
         # Choosing number of components of the feature vector
-        feat_vec = self.eigenvectors[:axes]
+        self.feat_vec = self.eigenvectors[:axes]
         # Transforming the data
-        self.transformed_data = (feat_vec.dot(sub_means.T))
+        self.transformed_data = (self.feat_vec.dot(sub_means.T))
         # Reconstructing to the original data
-        self.reconstructed_data = self.transformed_data.T.dot(feat_vec)+self.means
+        self.reconstructed_data = self.transformed_data.T.dot(self.feat_vec)+self.means
         self.explained_variance_ratio = self.eigenvalues / self.eigenvalues.sum()
         return -self.transformed_data.T
 
@@ -72,11 +75,11 @@ class OPCA():
 
 
         if dims == 4:
-            self.scatter_4D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_4D(values, labels, axes, title+ ' Own PCA', self.data_name, figsize, save)
         elif dims == 3:
-            self.scatter_3D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_3D(values, labels, axes, title+ ' Own PCA', self.data_name, figsize, save)
         elif dims == 2:
-            self.scatter_2D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_2D(values, labels, axes, title+ ' Own PCA', self.data_name, figsize, save)
 
         if save:
             plt.savefig(save)
@@ -84,6 +87,7 @@ class OPCA():
     def scree_plot(self, save=False):
         plt.plot(np.cumsum(self.explained_variance_ratio), marker='.', color=colors[1])
         plt.bar(list(range(0, self.n_features)), self.explained_variance_ratio, color=colors[2])
+        plt.title('Explained Variance Own PCA')
         plt.xlabel('Number of Components')
         plt.ylabel('Variance (%)')
 

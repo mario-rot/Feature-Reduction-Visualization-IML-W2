@@ -32,7 +32,7 @@ class feature_agglomeration():
         self.transformed_data = None
         self.explained_variance_ratio = None
 
-    def fit(self, num_clusters=None, affinity='euclidean', linkage='single',
+    def fit(self, num_clusters=None, affinity='cosine', linkage='average',
                                  distance_threshold=None):
         x = self.data
 
@@ -64,11 +64,11 @@ class feature_agglomeration():
         dims = len(axes)
 
         if dims == 4:
-            self.scatter_4D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_4D(values, labels, axes, title+' Feature Agglomeration', self.data_name, figsize, save)
         elif dims == 3:
-            self.scatter_3D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_3D(values, labels, axes, title+' Feature Agglomeration', self.data_name, figsize, save)
         elif dims == 2:
-            self.scatter_2D(values, labels, axes, title, self.data_name, figsize, save)
+            self.scatter_2D(values, labels, axes, title+' Feature Agglomeration', self.data_name, figsize, save)
 
         if save:
             plt.savefig(save)
